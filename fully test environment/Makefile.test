@@ -1,0 +1,24 @@
+# Makefile for GPIO Test Application
+
+CC = gcc
+CFLAGS = -Wall -Wextra -O2
+TARGET = gpio_test
+
+all: $(TARGET)
+
+$(TARGET): gpio_test.c gpio_driver.h
+	$(CC) $(CFLAGS) -o $(TARGET) gpio_test.c
+
+clean:
+	rm -f $(TARGET)
+
+test: $(TARGET)
+	./$(TARGET)
+
+install: $(TARGET)
+	sudo cp $(TARGET) /usr/local/bin/
+
+uninstall:
+	sudo rm -f /usr/local/bin/$(TARGET)
+
+.PHONY: all clean test install uninstall
